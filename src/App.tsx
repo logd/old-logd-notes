@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './App.css';
+import TextInput from './components/TextInput/TextInput';
 
 class App extends React.Component {
   public render() {
@@ -10,6 +10,7 @@ class App extends React.Component {
         <header className="App-header">
           <h1 className="App-title">Logd Note-taking app</h1>
         </header>
+        <div>Input: <TextInput /></div>
       </div>
     );
   }
