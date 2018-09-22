@@ -16,6 +16,7 @@ class App extends React.Component<{}, any> {
         <h1>Draft.js Editor</h1>
         <div className="editor">
           <Editor
+            placeholder={"Write something..."}
             editorState={this.state.editorState}
             onChange={this.onChange}
           />
