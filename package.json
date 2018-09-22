@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "draft-js": "^0.10.5",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts-ts": "2.17.0"
@@ -15,6 +16,7 @@
     "deploy:staging": "yarn build && surge --domain https://logd-app-staging.surge.sh --project /Users/andersjramsay/dev/logd_app/build"
   },
   "devDependencies": {
+    "@types/draft-js": "^0.10.25",
     "@types/jest": "^23.3.2",
     "@types/node": "^10.10.1",
     "@types/react": "^16.4.14",
