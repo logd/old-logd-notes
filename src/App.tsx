@@ -1,28 +1,33 @@
-import { Editor, EditorState } from 'draft-js';
+// import { Editor, EditorState } from 'draft-js';
 import * as React from 'react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-class App extends React.Component<{}, any> {
-  public onChange: any;
+interface IState {
+  text: string;
+}
+class App extends React.Component<{}, IState> {
   constructor(props: any) {
-    super(props);
-    this.state = { editorState: EditorState.createEmpty() };
-    this.onChange = (editorState: any) => this.setState({ editorState });
+    super(props)
+    this.state = { text: '' } // You can also pass a Quill Delta here
+    this.handleChange = this.handleChange.bind(this)
   }
   public render() {
 
     document.title = "Logd Note-Taking App";
     return (
       <div className="App">
-        <h1>Draft.js Editor</h1>
+        <h1>Quill Editor</h1>
         <div className="editor">
-          <Editor
-            placeholder={"Write something..."}
-            editorState={this.state.editorState}
-            onChange={this.onChange}
-          />
+          <ReactQuill value={this.state.text}
+            onChange={this.handleChange} />
         </div>
       </div>
     );
+  }
+
+  private handleChange(value: string) {
+    this.setState({ text: value })
   }
 }
 
