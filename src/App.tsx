@@ -4,23 +4,44 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 interface IState {
-  text: string;
+  text: any;
+  [key: string]: string | null;
 }
 class App extends React.Component<{}, IState> {
   constructor(props: any) {
     super(props)
     this.state = { text: '' } // You can also pass a Quill Delta here
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
+  }
+  public componentDidMount() {
+    this.hydrateStateWithLocalStorage();
+    window.addEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage.bind(this)
+    );
+  }
+
+  public componentWillUnmount() {
+    window.removeEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage.bind(this)
+    );
+
+    // saves if component has a chance to unmount
+    this.saveStateToLocalStorage();
   }
   public render() {
 
     document.title = "Logd Note-Taking App";
     return (
       <div className="App">
-        <h1>Quill Editor</h1>
         <div className="editor">
-          <ReactQuill value={this.state.text}
-            onChange={this.handleChange} />
+          <ReactQuill
+            theme="snow"
+            value={this.state.text}
+            onChange={this.handleChange}
+          />
         </div>
       </div>
     );
@@ -28,6 +49,36 @@ class App extends React.Component<{}, IState> {
 
   private handleChange(value: string) {
     this.setState({ text: value })
+
+    localStorage.setItem("text", JSON.stringify(value));
+  }
+  private hydrateStateWithLocalStorage() {
+    // for all items in state
+    for (const key in this.state) {
+      // if the key exists in localStorage
+      if (localStorage.hasOwnProperty(key)) {
+        // get the key's value from localStorage
+        let value = localStorage.getItem(key);
+
+        // parse the localStorage string and setState
+        try {
+          value = JSON.parse(value as any);
+          this.setState({ [key]: value });
+        } catch (e) {
+          // handle empty string
+          this.setState({ [key]: value });
+        }
+      }
+    }
+  }
+
+  private saveStateToLocalStorage() {
+    // for every item in React state
+    // tslint:disable-next-line:forin
+    for (const key in this.state) {
+      // save to localStorage
+      localStorage.setItem(key, JSON.stringify(this.state[key]));
+    }
   }
 }
 
