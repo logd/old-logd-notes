@@ -1,6 +1,15 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
   "linterOptions": {
+    "no-console": [
+      false,
+      "log",
+      "error"
+    ],
     "exclude": [
       "config/**/*.js",
       "node_modules/**/*.ts",
