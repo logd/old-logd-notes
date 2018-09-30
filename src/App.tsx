@@ -41,6 +41,7 @@ class App extends React.Component<{}, IState> {
             theme="snow"
             value={this.state.text}
             onChange={this.handleChange}
+            placeholder={"Write something..."}
           />
         </div>
       </div>
