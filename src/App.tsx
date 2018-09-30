@@ -20,6 +20,7 @@ class App extends React.Component<{}, IState> {
       "beforeunload",
       this.saveStateToLocalStorage.bind(this)
     );
+    this.autofocus();
   }
 
   public componentWillUnmount() {
@@ -80,6 +81,13 @@ class App extends React.Component<{}, IState> {
       // save to localStorage
       localStorage.setItem(key, JSON.stringify(this.state[key]));
     }
+  }
+
+  private autofocus = () => {
+    const div: any = document.getElementsByClassName("ql-editor")[0];
+    setTimeout(() => {
+      div.focus();
+    }, 0);
   }
 }
 
