@@ -14,7 +14,9 @@
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "deploy:staging": "yarn build && surge --domain https://logd-app-staging.surge.sh --project /Users/andersjramsay/dev/logd_app/build"
+    "deploy:staging": "yarn build && surge --domain https://logd-app-staging.surge.sh --project /Users/andersjramsay/dev/logd_app/build",
+    "deploy:prod-redirect": "yarn build && surge --domain https://logd-app-redirect.surge.sh  --project /Users/andersjramsay/dev/logd_app/build",
+    "deploy:prod": "yarn build && surge --domain https://logd.co --project /Users/andersjramsay/dev/logd_app/build"
   },
   "devDependencies": {
     "@types/draft-js": "^0.10.25",
