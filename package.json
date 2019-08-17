@@ -3,27 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "draft-js": "^0.10.5",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-quill": "^1.3.1",
-    "react-scripts-ts": "2.17.0"
+    "react-scripts-ts": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "deploy:staging": "yarn build && surge --domain https://logd-app-staging.surge.sh --project /Users/andersjramsay/dev/logd_app/build",
+    "deploy:staging": "surge --domain https://logd-app-staging.surge.sh --project /Users/andersjramsay/dev/logd_project/logd-notes/build",
     "deploy:prod-redirect": "yarn build && surge --domain https://logd-app-redirect.surge.sh  --project /Users/andersjramsay/dev/logd_app/build",
     "deploy:prod": "yarn build && surge --domain https://logd.co --project /Users/andersjramsay/dev/logd_app/build"
   },
   "devDependencies": {
-    "@types/draft-js": "^0.10.25",
     "@types/jest": "^23.3.2",
-    "@types/node": "^10.10.1",
+    "@types/node": "^12.7.2",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
-    "typescript": "^3.0.3"
+    "typescript": "^3.5.3"
   }
 }
