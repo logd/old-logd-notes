@@ -1,7 +1,6 @@
-// import { Editor, EditorState } from 'draft-js';
-import * as React from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import * as React from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 interface IState {
   text: any;
@@ -9,8 +8,8 @@ interface IState {
 }
 class App extends React.Component<{}, IState> {
   constructor(props: any) {
-    super(props)
-    this.state = { text: '' } // You can also pass a Quill Delta here
+    super(props);
+    this.state = { text: "" }; // You can also pass a Quill Delta here
     this.handleChange = this.handleChange.bind(this);
     this.saveStateToLocalStorage = this.saveStateToLocalStorage.bind(this);
   }
@@ -33,10 +32,9 @@ class App extends React.Component<{}, IState> {
     this.saveStateToLocalStorage();
   }
   public render() {
-
     document.title = "Logd Note-Taking App";
     return (
-      <div className="App">
+      <div>
         <div className="editor">
           <ReactQuill
             theme="snow"
@@ -50,7 +48,7 @@ class App extends React.Component<{}, IState> {
   }
 
   private handleChange(value: string) {
-    this.setState({ text: value })
+    this.setState({ text: value });
 
     localStorage.setItem("text", JSON.stringify(value));
   }
@@ -88,7 +86,7 @@ class App extends React.Component<{}, IState> {
     setTimeout(() => {
       div.focus();
     }, 0);
-  }
+  };
 }
 
 export default App;
