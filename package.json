@@ -13,6 +13,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "s3:upload": "aws s3 sync build/ s3://logd.co/",
     "deploy:staging": "surge --domain https://logd-app-staging.surge.sh --project /Users/andersjramsay/dev/logd_project/logd-notes/build",
     "deploy:prod": "surge /Users/andersjramsay/dev/logd_project/logd-notes/build"
   },
