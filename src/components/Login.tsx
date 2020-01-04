@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl } from "react-bootstrap";
-// import "./Login.css";
+import { Auth } from "aws-amplify";
 
 export const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -10,8 +10,15 @@ export const Login: React.FC = () => {
     return email.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event: any) {
+  async function handleSubmit(event: any) {
     event.preventDefault();
+  
+    try {
+      await Auth.signIn(email, password);
+      alert("Logged in");
+    } catch (e) {
+      alert(e.message);
+    }
   }
 
   return (
