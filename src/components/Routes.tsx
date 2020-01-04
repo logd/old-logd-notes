@@ -1,13 +1,14 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import Home from "./Home";
 import { Login } from './Login';
+import AppliedRoute from './AppliedRoute'; 
 
-export default function Routes() {
+export const Routes: React.FC<{ appProps: any }> = ({  appProps }) => {
   return (
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/login" exact component={Login} />
+      <AppliedRoute path="/" exact component={Home} appProps={appProps} />
+      <AppliedRoute path="/login" exact component={Login} appProps={appProps} />
     </Switch>
   );
 }

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Button, FormGroup, FormControl } from "react-bootstrap";
 import { Auth } from "aws-amplify";
-
-export const Login: React.FC = () => {
+import { withRouter } from "react-router-dom";
+const LoginComponent: React.FC<any> = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,7 +14,8 @@ export const Login: React.FC = () => {
   
     try {
       await Auth.signIn(email, password);
-      alert("Logged in");
+      props.userHasAuthenticated(true);
+      props.history.push("/");
     } catch (e) {
       alert(e.message);
     }
@@ -48,3 +48,5 @@ export const Login: React.FC = () => {
     </div>
   );
 }
+
+export const Login = withRouter(LoginComponent);
