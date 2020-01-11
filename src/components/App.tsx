@@ -10,19 +10,14 @@ interface Props extends RouteComponentProps {
 
 const App: React.FC<Props> = ({ location, history }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  // const [isAuth, setIsAuth] = useState(false);
   const {pathname} = location;
 
   useEffect(() => {
     const updateCurrentUser = async () => {
       try {
         let user = await Auth.currentAuthenticatedUser();
-        console.log('user: ', user);
         setCurrentUser(user);
- 
-        // setCurrentUser(user)
       } catch {
-        // setCurrentUser(null)
         setCurrentUser(null);
       }
     }
