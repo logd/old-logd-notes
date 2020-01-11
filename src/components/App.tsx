@@ -1,40 +1,51 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
-import { Link } from "react-router-dom";
-import { Navbar, Nav, NavItem } from "react-bootstrap";
-import Routes from "./Routes";
+import { Link, withRouter, RouteComponentProps } from "react-router-dom";
+import { Routes } from "./Routes";
+import { Auth } from "aws-amplify";
 
-// document.title = "Logd Note-Taking App";
-const App: React.FC = () => {
+interface Props extends RouteComponentProps {
+
+}
+
+const App: React.FC<Props> = ({ location, history }) => {
+  const [isAuth, setIsAuth] = useState(false);
+  const {pathname} = location;
+
+  async function handleLogout(e: any) {
+    e.preventDefault();
+    try {
+      await Auth.signOut();
+      setIsAuth(false);
+      history.push("/login");
+      
+    } catch (error) {
+      console.error(`Logout: ${error}`);
+    }
+  }
 
   return (
     <div className="App container">
       <div style={{ display: 'flex' }}>
-        <div style={{ flex: 1}}><Link to="/">Logd</Link></div>
-        <div style={{flexBasis: '20%', alignContent: 'space-between'}}>
-        <Link to="/signup">Signup</Link>
-      <Link to="/login">Login</Link>
-      </div>
-      </div>
-      {/* <Navbar collapseOnSelect>
-        <Navbar.Brand>
-          <Link to="/">Logd</Link>
-        </Navbar.Brand>
-        <Navbar.Collapse>
-          <Nav className="justify-content-center">
-            <Nav.Item>
+        <div style={{ flex: 1 }}><Link to="/">Logd</Link></div>
+        <div style={{ flexBasis: '20%', alignContent: 'space-between' }}>
+          {isAuth ?
+            <a href="#" onClick={(e) => handleLogout(e)}>Sign out</a>
+            :
+            pathname === '/login' ?
+            null
+            :
+            <>
               <Link to="/signup">Signup</Link>
-            </Nav.Item>
-            <Nav.Item>
               <Link to="/login">Login</Link>
-            </Nav.Item>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar> */}
-      <Routes />
+            </>
+          }
+        </div>
+      </div>
+      <Routes isAuth={isAuth} setIsAuth={setIsAuth} />
     </div>
   );
 
 }
 
-export default App;
+export default withRouter(App);
