@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { Button, FormGroup, FormControl } from "react-bootstrap";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Auth } from "aws-amplify";
+interface Props extends RouteComponentProps {
+  setIsAuth: (isAuth: boolean) => void;
+}
 
-export const Login: React.FC = () => {
+
+const LoginComponent: React.FC<Props> = ({ setIsAuth, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,12 +14,14 @@ export const Login: React.FC = () => {
     return email.length > 0 && password.length > 0;
   }
 
-  async function handleSubmit(event: any) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
   
     try {
       await Auth.signIn(email, password);
-      alert("Logged in");
+      setIsAuth(true);
+      // TODO: redirect to the originally requested page
+      history.push("/");
     } catch (e) {
       alert(e.message);
     }
@@ -48,3 +54,5 @@ export const Login: React.FC = () => {
     </div>
   );
 }
+
+export const Login = withRouter(LoginComponent);
