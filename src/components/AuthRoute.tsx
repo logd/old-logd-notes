@@ -11,7 +11,7 @@ export const AuthRoute: React.FC<Props> = ({ component: C, appProps, ...rest }) 
     <Route
       {...rest}
       render={props =>
-        appProps.isAuth
+        appProps.currentUser
           ? (C ? <C {...props} {...appProps} /> : null)
           : <Redirect
               to={`/login?redirect=${props.location.pathname}${props.location

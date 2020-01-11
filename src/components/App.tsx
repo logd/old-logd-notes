@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { Routes } from "./Routes";
@@ -9,14 +9,31 @@ interface Props extends RouteComponentProps {
 }
 
 const App: React.FC<Props> = ({ location, history }) => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  // const [isAuth, setIsAuth] = useState(false);
   const {pathname} = location;
+
+  useEffect(() => {
+    const updateCurrentUser = async () => {
+      try {
+        let user = await Auth.currentAuthenticatedUser();
+        console.log('user: ', user);
+        setCurrentUser(user);
+ 
+        // setCurrentUser(user)
+      } catch {
+        // setCurrentUser(null)
+        setCurrentUser(null);
+      }
+    }
+    updateCurrentUser();
+  }, [])
 
   async function handleLogout(e: any) {
     e.preventDefault();
     try {
       await Auth.signOut();
-      setIsAuth(false);
+      setCurrentUser(null);
       history.push("/login");
       
     } catch (error) {
@@ -29,20 +46,27 @@ const App: React.FC<Props> = ({ location, history }) => {
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}><Link to="/">Logd</Link></div>
         <div style={{ flexBasis: '20%', alignContent: 'space-between' }}>
-          {isAuth ?
-            <a href="#" onClick={(e) => handleLogout(e)}>Sign out</a>
+          {currentUser ?
+            <button style={{
+              // TODO: turn into LinkButton - https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              textDecoration: 'underline',
+              display: 'inline',
+              margin: 0,
+              padding: 0,
+            }} 
+            onClick={(e) => handleLogout(e)}>Sign out</button>
             :
             pathname === '/login' ?
             null
             :
-            <>
-              <Link to="/signup">Signup</Link>
-              <Link to="/login">Login</Link>
-            </>
+            <Link to="/login">Login</Link>
           }
         </div>
       </div>
-      <Routes isAuth={isAuth} setIsAuth={setIsAuth} />
+      <Routes appProps={{ currentUser, setCurrentUser }} />
     </div>
   );
 

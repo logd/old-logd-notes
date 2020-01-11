@@ -6,7 +6,11 @@ import { AnonRoute } from './AnonRoute';
 import { AuthRoute } from './AuthRoute';
 import { AppProps } from '../models';
 
-export const Routes: React.FC<AppProps> = (appProps) => {
+interface Props {
+  appProps: AppProps
+}
+
+export const Routes: React.FC<Props> = ({appProps}) => {
   return (
     <Switch>
       <AuthRoute path="/" exact component={Home} appProps={appProps} />

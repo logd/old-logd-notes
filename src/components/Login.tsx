@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Auth } from "aws-amplify";
 interface Props extends RouteComponentProps {
-  setIsAuth: (isAuth: boolean) => void;
+  setCurrentUser: (user: any) => void;
 }
 
 
-const LoginComponent: React.FC<Props> = ({ setIsAuth, history }) => {
+const LoginComponent: React.FC<Props> = ({ setCurrentUser, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,8 +18,8 @@ const LoginComponent: React.FC<Props> = ({ setIsAuth, history }) => {
     event.preventDefault();
   
     try {
-      await Auth.signIn(email, password);
-      setIsAuth(true);
+      const user = await Auth.signIn(email, password);
+      setCurrentUser(user);
       // TODO: redirect to the originally requested page
       history.push("/");
     } catch (e) {

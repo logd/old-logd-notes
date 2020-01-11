@@ -11,7 +11,7 @@ export function AnonRoute({ component: C, appProps, ...rest }: Props) {
     <Route
       {...rest}
       render={props =>
-        !appProps.isAuth
+        !appProps.currentUser
           ? (C ? <C {...props} {...appProps} /> : null)
           : <Redirect to="/" />}
     />

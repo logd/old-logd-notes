@@ -1,4 +1,4 @@
 export interface AppProps {
-    isAuth: boolean;
-    setIsAuth?: (isAuth: boolean) => void;
+    currentUser: any;
+    setCurrentUser?: (user: any) => void;
 }
