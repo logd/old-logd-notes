@@ -1,13 +1,20 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import Home from "./Home";
 import { Login } from './Login';
+import { AnonRoute } from './AnonRoute';
+import { AuthRoute } from './AuthRoute';
+import { AppProps } from '../models';
 
-export default function Routes() {
+interface Props {
+  appProps: AppProps
+}
+
+export const Routes: React.FC<Props> = ({appProps}) => {
   return (
     <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/login" exact component={Login} />
+      <AuthRoute path="/" exact component={Home} appProps={appProps} />
+      <AnonRoute path="/login" exact component={Login} appProps={appProps} />
     </Switch>
   );
 }
