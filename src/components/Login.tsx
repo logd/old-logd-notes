@@ -28,10 +28,12 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history }) => {
   }
 
   return (
-    <div className="Login">
+    <div  style={{
+      padding: '10px 20px'
+      }}>
       <form onSubmit={handleSubmit}>
-          <div>
-          <label>Email</label>
+          <div style={{ paddingBottom: '20px'}}>
+          <label style={{ display: 'block'}}>Email</label>
           <input
             autoFocus
             type="email"
@@ -39,16 +41,21 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history }) => {
             onChange={e => setEmail(e.target.value)}
           />
           </div>
-          <div>
-          <label>Password</label>
+          <div style={{ paddingBottom: '20px'}}>
+          <label style={{ display: 'block'}}>Password</label>
           <input
             value={password}
             onChange={e => setPassword(e.target.value)}
             type="password"
           />
           </div>
-        <button disabled={!validateForm()} type="submit">
-          Login
+        <button style={{
+          WebkitAppearance: 'none',
+          color: '#212529',
+          backgroundColor: '#f8f9fa',
+          borderColor: '#f8f9fa'
+          }} disabled={!validateForm()} type="submit">
+          Sign In
         </button>
       </form>
     </div>
