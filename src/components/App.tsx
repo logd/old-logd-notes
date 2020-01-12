@@ -37,10 +37,12 @@ const App: React.FC<Props> = ({ location, history }) => {
   }
 
   return (
-    <div className="App container">
-      <div style={{ display: 'flex' }}>
+    <div>
+      <div style={{
+        padding: '10px 20px',
+        display: 'flex' }}>
         <div style={{ flex: 1 }}><Link to="/">Logd</Link></div>
-        <div style={{ flexBasis: '20%', alignContent: 'space-between' }}>
+        <div style={{ flexBasis: '20%', textAlign: 'right' }}>
           {currentUser ?
             <button style={{
               // TODO: turn into LinkButton - https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md
