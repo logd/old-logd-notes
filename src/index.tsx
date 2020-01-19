@@ -10,10 +10,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 Amplify.configure({
     Auth: {
       mandatorySignIn: true,
-      region: config.cognito.REGION,
-      userPoolId: config.cognito.USER_POOL_ID,
-    //   identityPoolId: config.cognito.IDENTITY_POOL_ID,
-      userPoolWebClientId: config.cognito.APP_CLIENT_ID
+      region: process.env.REACT_APP_AWS_REGION,
+      userPoolId: process.env.REACT_APP_USER_POOL_ID,
+      identityPoolId: process.env.REACT_APP_USER_POOL_ID,
+      userPoolWebClientId: process.env.REACT_APP_USER_POOL_APP_CLIENT_ID
     },
     // Storage: {
     //   region: config.s3.REGION,
