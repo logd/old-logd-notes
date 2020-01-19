@@ -11,7 +11,9 @@ Amplify.configure({
     Auth: {
       mandatorySignIn: true,
       region: process.env.REACT_APP_AWS_REGION,
-      ...config.cognito,
+      userPoolId: config.cognito.userPoolId,
+      identityPoolId: config.cognito.identityPoolId,
+      userPoolWebClientId: config.cognito.userPoolWebClientId,
     },
     API: {
       endpoints: [
