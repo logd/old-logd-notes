@@ -1,16 +1,27 @@
-export default {
-    // s3: {
-    //   REGION: "YOUR_S3_UPLOADS_BUCKET_REGION",
-    //   BUCKET: "YOUR_S3_UPLOADS_BUCKET_NAME"
-    // },
-    // apiGateway: {
-    //   REGION: "YOUR_API_GATEWAY_REGION",
-    //   URL: "YOUR_API_GATEWAY_URL"
-    // },
-    cognito: {
-      REGION: "us-east-1",
-      USER_POOL_ID: "us-east-1_xWcgIOObG",
-      APP_CLIENT_ID: "7hr54h2mb2aotk2lnfis9turqo",
-    //   IDENTITY_POOL_ID: "YOUR_IDENTITY_POOL_ID"
+const allConfigs: any = {
+    DEV: {
+        cognito: {
+            userPoolId: process.env.REACT_APP_USER_POOL_ID_DEV,
+            identityPoolId: process.env.REACT_APP_IDENTITY_POOL_ID_DEV,
+            userPoolWebClientId: process.env.REACT_APP_USER_POOL_APP_CLIENT_ID_DEV
+        },
+        api: {
+            endpoint: process.env.REACT_APP_API_GATEWAY_URL_DEV,
+        }
+    },
+    PROD: {
+        cognito: {
+            userPoolId: process.env.REACT_APP_USER_POOL_ID_PROD,
+            identityPoolId: process.env.REACT_APP_IDENTITY_POOL_ID_PROD,
+            userPoolWebClientId: process.env.REACT_APP_USER_POOL_APP_CLIENT_ID_PROD
+        },
+        api: {
+            endpoint: process.env.REACT_APP_API_GATEWAY_URL_PROD,
+        }
     }
-  };
+}
+const stage = process.env.REACT_APP_STAGE ? process.env.REACT_APP_STAGE : 'DEV';
+
+
+export default allConfigs[stage];
+
