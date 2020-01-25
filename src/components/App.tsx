@@ -8,7 +8,7 @@ interface Props extends RouteComponentProps {
 
 }
 
-const App: React.FC<Props> = ({ location, history }) => {
+const AppComponent: React.FC<Props> = ({ location, history }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const {pathname} = location;
 
@@ -16,7 +16,7 @@ const App: React.FC<Props> = ({ location, history }) => {
     const updateCurrentUser = async () => {
       try {
         let user = await Auth.currentAuthenticatedUser();
-        setCurrentUser(user);
+        setCurrentUser({...user});
       } catch {
         setCurrentUser(null);
       }
@@ -69,4 +69,4 @@ const App: React.FC<Props> = ({ location, history }) => {
 
 }
 
-export default withRouter(App);
+export const App = withRouter(AppComponent);

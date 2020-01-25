@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Auth } from "aws-amplify";
 interface Props extends RouteComponentProps {
   setCurrentUser: (user: any) => void;
+  currentUser: any;
 }
 
 
-const LoginComponent: React.FC<Props> = ({ setCurrentUser, history }) => {
+const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (currentUser) {
+      history.push("/");
+    }
+  }, [currentUser, history])
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -20,15 +27,13 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history }) => {
     try {
       const user = await Auth.signIn(email, password);
       setCurrentUser(user);
-      // TODO: redirect to the originally requested page
-      history.push("/");
     } catch (e) {
       alert(e.message);
     }
   }
 
   return (
-    <div  style={{
+    <div data-cy="login"  style={{
       padding: '10px 20px'
       }}>
       <form onSubmit={handleSubmit}>
@@ -38,6 +43,7 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history }) => {
             autoFocus
             type="email"
             value={email}
+            placeholder={'Email'}
             onChange={e => setEmail(e.target.value)}
           />
           </div>
@@ -47,6 +53,7 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history }) => {
             value={password}
             onChange={e => setPassword(e.target.value)}
             type="password"
+            placeholder={'Password'}
           />
           </div>
         <button style={{

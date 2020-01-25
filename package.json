@@ -16,15 +16,24 @@
     "build": "react-scripts build",
     "build:dev": "REACT_APP_STAGE=DEV yarn build",
     "build:prod": "REACT_APP_STAGE=PROD yarn build",
+    "eject": "react-scripts eject",
+    "atf": "atf -d 'src' -e 'ts' 'tsx'",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test:e2e": "cypress open",
+    "test:e2e:ci": "cypress run --record"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.18",
+    "@testing-library/jest-dom": "^5.0.0",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^8.0.3",
+    "@types/jest": "^24.9.0",
     "@types/node": "^12.7.12",
     "@types/react": "^16.9.5",
     "@types/react-dom": "^16.0.7",
     "@types/react-router-dom": "^5.1.3",
+    "auto-test-file": "^1.2.2",
+    "cypress": "^3.8.3",
+    "ts-jest": "^24.3.0",
     "typescript": "^3.6.4"
   },
   "browserslist": {
