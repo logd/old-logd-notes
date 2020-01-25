@@ -1,21 +1,17 @@
-name: Install, Build & Run Cypress
-
+name: End-to-end tests
 on: [push]
-
 jobs:
-  test:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
+  cypress-run:
+    runs-on: ubuntu-latest
     steps:
-      - name: Install Packages
-        run: yarn
-      - name: Build
-        run: yarn build:dev
-      - name: Serve
-        run: yarn serve
-      - name: Run Cypress
-        run: yarn test:e2e:ci
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v1
+        with:
+          build: yarn build
+          start: yarn serve
+          wait-on: 'http://localhost:5000'
         env:
           CYPRESS_DASHBOARD_KEY: ${{ secrets.CYPRESS_DASHBOARD_KEY }}
