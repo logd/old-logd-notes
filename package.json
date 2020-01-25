@@ -19,7 +19,8 @@
     "eject": "react-scripts eject",
     "atf": "atf -d 'src' -e 'ts' 'tsx'",
     "test": "react-scripts test --env=jsdom",
-    "test:e2e": "cypress open"
+    "test:e2e": "cypress open",
+    "cy:ci": "cypress run --record --key 4a9373ab-2ee8-4c2d-ae4a-6b5ac4bfe023"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.0.0",
