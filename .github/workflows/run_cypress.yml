@@ -9,6 +9,9 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
+      - uses: actions/checkout@master
+        with:
+          ref: ${{ github.ref }}
       - name: Install Packages
         run: yarn
       - name: Build
