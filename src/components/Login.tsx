@@ -15,7 +15,7 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser 
     if (currentUser) {
       history.push("/");
     }
-  }, [currentUser])
+  }, [currentUser, history])
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -33,7 +33,7 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser 
   }
 
   return (
-    <div  style={{
+    <div data-cy="login"  style={{
       padding: '10px 20px'
       }}>
       <form onSubmit={handleSubmit}>
@@ -43,6 +43,7 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser 
             autoFocus
             type="email"
             value={email}
+            placeholder={'Email'}
             onChange={e => setEmail(e.target.value)}
           />
           </div>
@@ -52,6 +53,7 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser 
             value={password}
             onChange={e => setPassword(e.target.value)}
             type="password"
+            placeholder={'Password'}
           />
           </div>
         <button style={{
