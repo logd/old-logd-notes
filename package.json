@@ -19,7 +19,7 @@
     "eject": "react-scripts eject",
     "atf": "atf -d 'src' -e 'ts' 'tsx'",
     "test": "react-scripts test --env=jsdom",
-    "test:e2e": "cypress open",
+    "test:e2e": "CYPRESS_BASE_URL=http://localhost:3000/ cypress open",
     "test:e2e:ci": "cypress run --record"
   },
   "devDependencies": {
