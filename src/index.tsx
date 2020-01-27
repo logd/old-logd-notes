@@ -26,7 +26,6 @@ Amplify.configure({
     }
   });
 
-console.log('REACT_APP_STAGE: ', process.env.REACT_APP_STAGE);
 const isTesting = process.env.REACT_APP_STAGE === 'TEST';
 ReactDOM.render(
     <Router>
