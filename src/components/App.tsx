@@ -5,12 +5,32 @@ import { Routes } from "./Routes";
 import { Auth } from "aws-amplify";
 
 interface Props extends RouteComponentProps {
-
+isTesting?: boolean;
 }
 
-const AppComponent: React.FC<Props> = ({ location, history }) => {
+const AppComponent: React.FC<Props> = ({ location, history, isTesting }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const {pathname} = location;
+
+  async function handleLogin() {  
+    console.log('REACT_APP_CYPRESS_TEST_USER_EMAIL: ', process.env.REACT_APP_CYPRESS_TEST_USER_EMAIL);
+    const email = process.env.REACT_APP_CYPRESS_TEST_USER_EMAIL;
+    const password = process.env.REACT_APP_CYPRESS_TEST_USER_PASSWORD;
+    try {
+      if (email && password) {        
+        const user = await Auth.signIn(email, password);
+        setCurrentUser(user);
+      }
+    } catch (e) {
+      alert(e.message);
+    }
+  }
+
+  useEffect(() => {
+    if (isTesting) {
+      handleLogin()
+    }
+  }, [isTesting])
 
   useEffect(() => {
     const updateCurrentUser = async () => {

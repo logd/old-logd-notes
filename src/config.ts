@@ -20,7 +20,7 @@ const allConfigs: any = {
         }
     }
 }
-const stage = process.env.REACT_APP_STAGE ? process.env.REACT_APP_STAGE : 'DEV';
+const stage = process.env.REACT_APP_STAGE ? (process.env.REACT_APP_STAGE === 'TEST' ? 'DEV' : process.env.REACT_APP_STAGE) : 'DEV';
 
 
 export default allConfigs[stage];

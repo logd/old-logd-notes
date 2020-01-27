@@ -34,7 +34,7 @@ class Home extends React.Component<{}, IState> {
   public render() {
     // document.title = "Logd Note-Taking App";
     return (
-      <div>
+      <div data-cy="homepage">
         <div className="editor">
           <ReactQuill
             theme="snow"

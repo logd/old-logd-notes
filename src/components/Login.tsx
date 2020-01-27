@@ -33,10 +33,10 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser 
   }
 
   return (
-    <div data-cy="login"  style={{
+    <div data-cy="login-page"  style={{
       padding: '10px 20px'
       }}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-cy="login-form">
           <div style={{ paddingBottom: '20px'}}>
           <label style={{ display: 'block'}}>Email</label>
           <input
@@ -45,6 +45,7 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser 
             value={email}
             placeholder={'Email'}
             onChange={e => setEmail(e.target.value)}
+            data-cy="email-input"
           />
           </div>
           <div style={{ paddingBottom: '20px'}}>
@@ -54,6 +55,7 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser 
             onChange={e => setPassword(e.target.value)}
             type="password"
             placeholder={'Password'}
+            data-cy="password-input"
           />
           </div>
         <button style={{
