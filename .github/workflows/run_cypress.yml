@@ -17,3 +17,5 @@ jobs:
           wait-on: 'http://localhost:5000'
         env:
           CYPRESS_DASHBOARD_KEY: ${{ secrets.CYPRESS_DASHBOARD_KEY }}
+          REACT_APP_CYPRESS_TEST_USER_EMAIL:  ${{ secrets.REACT_APP_CYPRESS_TEST_USER_EMAIL }}
+          REACT_APP_CYPRESS_TEST_USER_PASSWORD:  ${{ secrets.REACT_APP_CYPRESS_TEST_USER_PASSWORD }}
