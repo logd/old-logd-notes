@@ -76,7 +76,7 @@ const AppComponent: React.FC<Props> = ({ location, history }) => {
               margin: 0,
               padding: 0,
             }} 
-            onClick={(e) => handleLogoutClick(e)}>Sign out</button>
+            onClick={handleLogoutClick}>Sign out</button>
             :
             pathname === '/login' ?
             null
