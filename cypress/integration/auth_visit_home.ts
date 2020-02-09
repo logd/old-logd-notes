@@ -1,13 +1,7 @@
-// import { Auth } from "aws-amplify";
-
 describe('Authenticated acccess to homepage', function () {
-    it('display the homepage', function () {
-        // todo: programmatically sign in user
-        cy.visit('/')
+    it('displays the homepage by default', function () {
+        cy.visit(`/testing-login/${Cypress.env('testEmail')}/${Cypress.env('testPassword')}`)
         cy.get('[data-cy=homepage]')
 
     })
 })
-
-// 1. visit homepage, let app bootstrap, submit useermname / pwd, request homepage again, expect page to he homepage
-// ideas: pass in usernmae, pwd via params
