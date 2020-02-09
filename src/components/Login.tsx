@@ -9,7 +9,7 @@ interface Props extends RouteComponentProps {
 
 
 const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser }) => {
-  const { handleLogin } = useContext(AuthContext)
+  const { handleLogin, isAuthenticating } = useContext(AuthContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -73,8 +73,8 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser 
           color: '#212529',
           backgroundColor: '#f8f9fa',
           borderColor: '#f8f9fa'
-          }} disabled={!validateForm()} type="submit">
-          Sign In
+          }} disabled={!validateForm() && !isAuthenticating} type="submit">
+          {isAuthenticating ? 'Signing In...' : 'Sign In'}
         </button>
       </form>
     </div>
