@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
+import { CognitoUser  } from 'amazon-cognito-identity-js';
+
 
 interface Props {
     email?: string;
@@ -7,16 +9,16 @@ interface Props {
 }
 
 interface AuthContextProps {
-    currentUser?: any; // TODO: use Amplify type
+    currentUser?: CognitoUser;
     isAuthenticating: boolean;
-    handleLogin: (email: string, password: string) => void;
-    handleLogout: (e: any) => void;
+    handleLogin: (email: string, password: string) => Promise<string | null>;
+    handleLogout: () => void;
 }
 
-const AuthContext = React.createContext<AuthContextProps>({
+export const AuthContext = React.createContext<AuthContextProps>({
     currentUser: undefined,
     isAuthenticating: false,
-    handleLogin: () => null,
+    handleLogin: () => new Promise(() => null),
     handleLogout: () => null,
 })
 
@@ -24,24 +26,33 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-//     useEffect(() => {
-//     if (isAuthenticating) {
-//       handleLogin()
-//     }
-//   }, [isAuthenticating])
+  useEffect(() => {
+    const updateCurrentUser = async () => {
+      try {
+        let user = await Auth.currentAuthenticatedUser();
+        setCurrentUser({...user});
+      } catch {
+        setCurrentUser(null);
+      }
+    }
+    updateCurrentUser();
+  }, [])
 
   async function handleLogin(email: string, password: string) {
     setIsAuthenticating(true);
     // const email = process.env.REACT_APP_CYPRESS_TEST_USER_EMAIL;
     // const password = process.env.REACT_APP_CYPRESS_TEST_USER_PASSWORD;
     try {
+        // TODO: switch to throw error if either is undefined
       if (email && password) {        
         const user = await Auth.signIn(email, password);
         // if !user throw new Error?
         setCurrentUser(user);
+        return null;
       }
     } catch (e) {
-      alert(e.message);
+    //   alert(e.message);
+      return e.message;
     } finally {
         setIsAuthenticating(false);
     }
@@ -59,8 +70,8 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 //     updateCurrentUser();
 //   }, [])
 
-  async function handleLogout(e: any) {
-    e.preventDefault();
+  async function handleLogout() {
+    // e.preventDefault();
     try {
       await Auth.signOut();
       setCurrentUser(null);

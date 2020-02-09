@@ -4,17 +4,20 @@ import Home from "./Home";
 import { Login } from './Login';
 import { AnonRoute } from './AnonRoute';
 import { AuthRoute } from './AuthRoute';
-import { AppProps } from '../models';
+// import { AppProps } from '../models';
+// import { AuthContext } from '../providers';
 
 interface Props {
-  appProps: AppProps
+  // appProps: AppProps
 }
 
-export const Routes: React.FC<Props> = ({appProps}) => {
+export const Routes: React.FC<Props> = () => {
+  // const { currentUser, handleLogout } = useContext(AuthContext)
+
   return (
     <Switch>
-      <AuthRoute path="/" exact component={Home} appProps={appProps} />
-      <AnonRoute path="/login" exact component={Login} appProps={appProps} />
+      <AuthRoute path="/" exact component={Home} />
+      <AnonRoute path="/login" exact component={Login} />
     </Switch>
   );
 }

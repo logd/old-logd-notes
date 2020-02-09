@@ -1,53 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import "react-quill/dist/quill.snow.css";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { Routes } from "./Routes";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
+import { AuthContext } from '../providers';
 
 interface Props extends RouteComponentProps {
-isTesting?: boolean;
+// isTesting?: boolean;
 }
 
-const AppComponent: React.FC<Props> = ({ location, history, isTesting }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+const AppComponent: React.FC<Props> = ({ location, history }) => {
+  const { currentUser, handleLogout } = useContext(AuthContext)
+
   const {pathname} = location;
 
-  async function handleLogin() {  
-    const email = process.env.REACT_APP_CYPRESS_TEST_USER_EMAIL;
-    const password = process.env.REACT_APP_CYPRESS_TEST_USER_PASSWORD;
-    try {
-      if (email && password) {        
-        const user = await Auth.signIn(email, password);
-        setCurrentUser(user);
-      }
-    } catch (e) {
-      alert(e.message);
-    }
-  }
+  // async function handleLogin() {  
+  //   const email = process.env.REACT_APP_CYPRESS_TEST_USER_EMAIL;
+  //   const password = process.env.REACT_APP_CYPRESS_TEST_USER_PASSWORD;
+  //   try {
+  //     if (email && password) {        
+  //       const user = await Auth.signIn(email, password);
+  //       setCurrentUser(user);
+  //     }
+  //   } catch (e) {
+  //     alert(e.message);
+  //   }
+  // }
 
-  useEffect(() => {
-    if (isTesting) {
-      handleLogin()
-    }
-  }, [isTesting])
+  // useEffect(() => {
+  //   if (isTesting) {
+  //     handleLogin()
+  //   }
+  // }, [isTesting])
 
-  useEffect(() => {
-    const updateCurrentUser = async () => {
-      try {
-        let user = await Auth.currentAuthenticatedUser();
-        setCurrentUser({...user});
-      } catch {
-        setCurrentUser(null);
-      }
-    }
-    updateCurrentUser();
-  }, [])
+  // useEffect(() => {
+  //   const updateCurrentUser = async () => {
+  //     try {
+  //       let user = await Auth.currentAuthenticatedUser();
+  //       setCurrentUser({...user});
+  //     } catch {
+  //       setCurrentUser(null);
+  //     }
+  //   }
+  //   updateCurrentUser();
+  // }, [])
 
-  async function handleLogout(e: any) {
+  async function handleLogoutClick(e: React.MouseEvent<any>) {
     e.preventDefault();
     try {
-      await Auth.signOut();
-      setCurrentUser(null);
+      await handleLogout();
+      // await Auth.signOut();
+      // setCurrentUser(null);
       history.push("/login");
       
     } catch (error) {
@@ -73,7 +76,7 @@ const AppComponent: React.FC<Props> = ({ location, history, isTesting }) => {
               margin: 0,
               padding: 0,
             }} 
-            onClick={(e) => handleLogout(e)}>Sign out</button>
+            onClick={(e) => handleLogoutClick(e)}>Sign out</button>
             :
             pathname === '/login' ?
             null
@@ -82,7 +85,7 @@ const AppComponent: React.FC<Props> = ({ location, history, isTesting }) => {
           }
         </div>
       </div>
-      <Routes appProps={{ currentUser, setCurrentUser }} />
+      <Routes />
     </div>
   );
 

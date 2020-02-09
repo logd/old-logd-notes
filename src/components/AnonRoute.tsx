@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
-import { AppProps } from '../models';
+// import { AppProps } from '../models';
+import { AuthContext } from '../providers';
 
 interface Props extends RouteProps {
-    appProps: AppProps;
+    // appProps: AppProps;
 }
 
-export function AnonRoute({ component: C, appProps, ...rest }: Props) {
+export function AnonRoute({ component: C, ...rest }: Props) {
+  const { currentUser } = useContext(AuthContext)
+
   return (
     <Route
       {...rest}
       render={props =>
-        !appProps.currentUser
-          ? (C ? <C {...props} {...appProps} /> : null)
+        !currentUser
+          ? (C ? <C {...props} /> : null)
           : <Redirect to="/" />}
     />
   );

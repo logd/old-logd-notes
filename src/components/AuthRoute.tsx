@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
-import { AppProps } from '../models';
+// import { AppProps } from '../models';
+import { AuthContext } from '../providers';
 
 interface Props extends RouteProps {
-    appProps: AppProps;
+    // appProps: AppProps;
 }
 
-export const AuthRoute: React.FC<Props> = ({ component: C, appProps, ...rest }) => {
+export const AuthRoute: React.FC<Props> = ({ component: C, ...rest }) => {
+  const { currentUser } = useContext(AuthContext)
   return (
     <Route
       {...rest}
       render={props =>
-        appProps.currentUser
-          ? (C ? <C {...props} {...appProps} /> : null)
+        currentUser
+          ? (C ? <C {...props} /> : null)
           : <Redirect
               to={`/login?redirect=${props.location.pathname}${props.location
                 .search}`}
