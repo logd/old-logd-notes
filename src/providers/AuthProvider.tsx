@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Auth } from "aws-amplify";
-import { CognitoUser  } from 'amazon-cognito-identity-js';
+import { CognitoUser } from 'amazon-cognito-identity-js';
 
 
 interface Props {
-    email?: string;
-    password?: string;
+    // email?: string;
+    // password?: string;
 }
 
 interface AuthContextProps {
@@ -23,74 +23,66 @@ export const AuthContext = React.createContext<AuthContextProps>({
 })
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState();
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
+    const [currentUser, setCurrentUser] = useState();
+    const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-  useEffect(() => {
-    const updateCurrentUser = async () => {
-      try {
-        let user = await Auth.currentAuthenticatedUser();
-        setCurrentUser({...user});
-      } catch {
-        setCurrentUser(null);
-      }
+
+
+    useEffect(() => {
+        const updateCurrentUser = async () => {
+            try {
+                let user = await Auth.currentAuthenticatedUser();
+                setCurrentUser({ ...user });
+            } catch {
+                setCurrentUser(null);
+            }
+        }
+        updateCurrentUser();
+    }, [])
+
+    async function handleLogin(email: string, password: string) {
+        let message;
+        setIsAuthenticating(true);
+        try {
+            // TODO: switch to throw error if either is undefined
+            if (email && password) {
+                const user = await Auth.signIn(email, password);
+                if (!user) {
+                    message = 'Sorry, there was a problem signing in';
+                }
+                // if !user throw new Error?
+                setCurrentUser(user);
+            }
+        } catch (e) {
+            //   alert(e.message);
+            message = e.message;
+        } finally {
+            setIsAuthenticating(false);
+            return message;
+        }
     }
-    updateCurrentUser();
-  }, [])
 
-  async function handleLogin(email: string, password: string) {
-    setIsAuthenticating(true);
-    // const email = process.env.REACT_APP_CYPRESS_TEST_USER_EMAIL;
-    // const password = process.env.REACT_APP_CYPRESS_TEST_USER_PASSWORD;
-    try {
-        // TODO: switch to throw error if either is undefined
-      if (email && password) {        
-        const user = await Auth.signIn(email, password);
-        // if !user throw new Error?
-        setCurrentUser(user);
-        return null;
-      }
-    } catch (e) {
-    //   alert(e.message);
-      return e.message;
-    } finally {
-        setIsAuthenticating(false);
+    async function handleLogout() {
+        // e.preventDefault();
+        try {
+            await Auth.signOut();
+            setCurrentUser(null);
+            //   history.push("/login");
+
+        } catch (error) {
+            console.error(`Logout: ${error}`);
+        }
     }
-  }
 
-//   useEffect(() => {
-//     const updateCurrentUser = async () => {
-//       try {
-//         let user = await Auth.currentAuthenticatedUser();
-//         setCurrentUser({...user});
-//       } catch {
-//         setCurrentUser(null);
-//       }
-//     }
-//     updateCurrentUser();
-//   }, [])
-
-  async function handleLogout() {
-    // e.preventDefault();
-    try {
-      await Auth.signOut();
-      setCurrentUser(null);
-    //   history.push("/login");
-      
-    } catch (error) {
-      console.error(`Logout: ${error}`);
-    }
-  }
-
-  return (
-    <AuthContext.Provider value={{
-        currentUser,
-        isAuthenticating,
-        handleLogin,
-        handleLogout
-    }}>
-{children}
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider value={{
+            currentUser,
+            isAuthenticating,
+            handleLogin,
+            handleLogout
+        }}>
+            {children}
+        </AuthContext.Provider>
+    );
 
 }
