@@ -12,7 +12,7 @@ jobs:
         uses: cypress-io/github-action@v1
         with:
           build: yarn build
-          start: REACT_APP_STAGE=TEST yarn serve -s build
+          start: yarn serve:test
           wait-on: 'http://localhost:5000'
         env:
           CYPRESS_BASE_URL: 'http://localhost:5000/'
