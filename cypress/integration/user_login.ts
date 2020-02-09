@@ -16,8 +16,8 @@ describe('User Login', function () {
     })
 
     it('is redirected to the homepage on successful login', function () {
-        cy.get('[data-cy=email-input]').type('test1@example.com')
-        cy.get('[data-cy=password-input]').type('Passw0rd!')
+        cy.get('[data-cy=email-input]').type(Cypress.env('testEmail'))
+        cy.get('[data-cy=password-input]').type(Cypress.env('testPassword'))
         cy.get('[data-cy=login-form]').submit()
         cy.get('[data-cy=homepage]')
     })
