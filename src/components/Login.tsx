@@ -3,16 +3,16 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { AuthContext } from '../providers';
 
 interface Props extends RouteComponentProps {
-  setCurrentUser: (user: any) => void;
-  currentUser: any;
+  // setCurrentUser: (user: any) => void;
+  // currentUser: any;
 }
 
 
-const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser }) => {
-  const { handleLogin, isAuthenticating } = useContext(AuthContext)
+const LoginComponent: React.FC<Props> = ({ history }) => {
+  const { handleLogin, isAuthenticating, currentUser } = useContext(AuthContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
     if (currentUser) {
@@ -31,15 +31,7 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser 
 
     if (message) {
       setErrorMessage(message)
-      // set error state to true, display message
     }
-  
-    // try {
-    //   const user = await Auth.signIn(email, password);
-    //   setCurrentUser(user);
-    // } catch (e) {
-    //   alert(e.message);
-    // }
   }
 
   return (
@@ -69,10 +61,10 @@ const LoginComponent: React.FC<Props> = ({ setCurrentUser, history, currentUser 
           />
           </div>
         <button style={{
-          WebkitAppearance: 'none',
-          color: '#212529',
-          backgroundColor: '#f8f9fa',
-          borderColor: '#f8f9fa'
+          // WebkitAppearance: 'none',
+          // color: '#212529',
+          // backgroundColor: '#f8f9fa',
+          // borderColor: '#f8f9fa'
           }} disabled={!validateForm() && !isAuthenticating} type="submit">
           {isAuthenticating ? 'Signing In...' : 'Sign In'}
         </button>
