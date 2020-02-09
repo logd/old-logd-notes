@@ -27,9 +27,6 @@ Amplify.configure({
   }
 });
 
-// const isTesting = process.env.REACT_APP_STAGE === 'TEST';
-// console.log('isTesting: ', isTesting);
-
 ReactDOM.render(
   <BrowserRouter>
     <AuthProvider>
