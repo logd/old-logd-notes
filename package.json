@@ -12,8 +12,8 @@
     "react-scripts": "^3.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "dev:test": "REACT_APP_STAGE=TEST react-scripts start",
+    "dev": "react-scripts start",
+    "dev:test": "REACT_APP_STAGE=TEST yarn dev",
     "build": "react-scripts build",
     "build:dev": "REACT_APP_STAGE=DEV yarn build",
     "build:prod": "REACT_APP_STAGE=PROD yarn build",
