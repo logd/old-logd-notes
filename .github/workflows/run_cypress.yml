@@ -5,6 +5,8 @@ jobs:
   e2e-test:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v1
     - name: Build App
       run:  |
         yarn build
