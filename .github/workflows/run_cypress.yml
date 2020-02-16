@@ -2,20 +2,17 @@ name: End-to-end tests
 on:
   [push, pull_request]
 jobs:
-  cypress-run:
+  e2e-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      
-      - name: Cypress run
-        uses: cypress-io/github-action@v1
-        with:
-          build: yarn build
-          start: yarn serve:test
-          wait-on: 'http://localhost:5000'
-        env:
-          CYPRESS_BASE_URL: 'http://localhost:5000/'
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_DASHBOARD_KEY }}
-          CYPRESS_TEST_USER_EMAIL:  ${{ secrets.TEST_USER_EMAIL }}
-          CYPRESS_TEST_USER_PASSWORD:  ${{ secrets.TEST_USER_PASSWORD }}
+    - name: Build App
+      run:  |
+        yarn build
+        yarn serve:test
+    - name: Run Cypress
+      env:
+        CYPRESS_BASE_URL: 'http://localhost:5000/'
+        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_DASHBOARD_KEY }}
+        CYPRESS_TEST_USER_EMAIL:  ${{ secrets.TEST_USER_EMAIL }}
+        CYPRESS_TEST_USER_PASSWORD:  ${{ secrets.TEST_USER_PASSWORD }}
+      run: yarn test:e2e:ci
