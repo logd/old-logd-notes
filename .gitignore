@@ -8,7 +8,6 @@
 /cypress/integration/examples
 /cypress/videos
 /cypress/screenshots
-cypress.env.json
 
 # production
 /build
