@@ -11,6 +11,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v1
         with:
+          env: true
           build: yarn build
-          start: REACT_APP_STAGE=TEST yarn serve -s build
+          start: yarn serve -s build
           wait-on: 'http://localhost:5000'
