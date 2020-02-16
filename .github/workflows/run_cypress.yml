@@ -9,6 +9,7 @@ jobs:
       uses: actions/checkout@v1
     - name: Build App
       run:  |
+        yarn install
         yarn build
         yarn serve:test
     - name: Run Cypress
