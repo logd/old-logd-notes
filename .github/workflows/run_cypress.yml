@@ -2,7 +2,7 @@ name: End-to-end tests
 on:
   [push, pull_request]
 jobs:
-  e2e-test:
+  build-app:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -12,6 +12,10 @@ jobs:
         yarn install
         yarn build
         yarn serve:test
+  e2e-test:
+    runs-on: ubuntu-latest
+    needs: build-app
+    steps:
     - name: Run Cypress
       env:
         CYPRESS_BASE_URL: 'http://localhost:5000/'
