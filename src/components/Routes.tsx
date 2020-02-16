@@ -9,7 +9,7 @@ import { TestingLogin } from './TestingLogin';
 interface Props {
   // appProps: AppProps
 }
-const isTesting = process.env.REACT_APP_STAGE === 'TEST';
+// const isTesting = process.env.REACT_APP_STAGE === 'TEST';
 
 export const Routes: React.FC<Props> = () => {
   
@@ -17,7 +17,9 @@ export const Routes: React.FC<Props> = () => {
     <Switch>
       <AuthRoute path="/" exact component={Home} />
       <AnonRoute path="/login" exact component={Login} />
-      {isTesting && <AnonRoute path="/testing-login/:email/:password" exact component={TestingLogin} />}
+      <AnonRoute path="/testing-login/:email/:password" exact component={TestingLogin} />
     </Switch>
   );
 }
+
+//   {isTesting && <AnonRoute path="/testing-login/:email/:password" exact component={TestingLogin} />}

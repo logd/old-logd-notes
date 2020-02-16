@@ -16,6 +16,6 @@ jobs:
           wait-on: 'http://localhost:5000'
         env:
           CYPRESS_BASE_URL: 'http://localhost:5000/'
-          CYPRESS_DASHBOARD_KEY: ${{ secrets.CYPRESS_DASHBOARD_KEY }}
-          CYPRESS_TEST_USER_EMAIL: test1@example.com
-          CYPRESS_TEST_USER_PASSWORD: Passw0rd!
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_DASHBOARD_KEY }}
+          CYPRESS_TEST_USER_EMAIL: 'test1@example.com'
+          CYPRESS_TEST_USER_PASSWORD: 'Passw0rd!'
