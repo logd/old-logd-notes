@@ -22,7 +22,7 @@
     "atf": "atf -d 'src' -e 'ts' 'tsx'",
     "test": "react-scripts test --env=jsdom",
     "test:e2e:dev": "CYPRESS_BASE_URL=http://localhost:3000/ cypress open",
-    "test:e2e:ci": "CYPRESS_BASE_URL=http://localhost:5000/ cypress run --record"
+    "test:e2e:ci": "cypress run --record"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.0.0",
@@ -34,7 +34,7 @@
     "@types/react-dom": "^16.0.7",
     "@types/react-router-dom": "^5.1.3",
     "auto-test-file": "^1.2.2",
-    "cypress": "^4.0.1",
+    "cypress": "^4.0.2",
     "serve": "^11.3.0",
     "ts-jest": "^24.3.0",
     "typescript": "^3.6.4"
