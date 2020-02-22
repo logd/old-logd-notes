@@ -9,7 +9,7 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@1.21.1
+        uses: cypress-io/github-action@v1.21.1
         with:
           record: true
           build: yarn build
