@@ -26,9 +26,9 @@ const TestingLoginComponent: React.FC<Props> = ({ location, setCurrentUser, curr
         }
     }
 
-      if (process.env.REACT_APP_STAGE !== 'TEST') {
-          return;
-      }
+    //   if (process.env.REACT_APP_STAGE !== 'TEST') {
+    //       return;
+    //   }
     const parsed = queryString.parse(location.search);
     const email = parsed.email;
     const password = parsed.password;
