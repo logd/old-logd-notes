@@ -21,7 +21,9 @@
     "eject": "react-scripts eject",
     "atf": "atf -d 'src' -e 'ts' 'tsx'",
     "test": "react-scripts test --env=jsdom",
-    "test:e2e:dev": "CYPRESS_BASE_URL=http://localhost:5000/ cypress open"
+    "test:e2e:dev": "CYPRESS_BASE_URL=http://localhost:5000/ cypress open",
+    "cypress:ci": "npx cypress run --record --config-file cypress.json",
+    "ci": "start-server-and-test serve:test http://localhost:5000/ cypress:ci"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.0.0",
@@ -35,6 +37,7 @@
     "auto-test-file": "^1.2.2",
     "cypress": "^4.0.2",
     "serve": "^11.3.0",
+    "start-server-and-test": "^1.10.8",
     "ts-jest": "^24.3.0",
     "typescript": "^3.6.4"
   },
