@@ -9,6 +9,13 @@ interface Props extends RouteComponentProps {
 
 const TestingLoginComponent: React.FC<Props> = ({ location, setCurrentUser, currentUser, history }) => {
 
+    useEffect(() => {
+        if (currentUser) {
+            history.push("/");
+        }
+    }, [currentUser, history])
+
+  useEffect(() => {
     async function login(email: string, password: string) {
   
         try {
@@ -19,13 +26,6 @@ const TestingLoginComponent: React.FC<Props> = ({ location, setCurrentUser, curr
         }
     }
 
-    useEffect(() => {
-        if (currentUser) {
-            history.push("/");
-        }
-    }, [currentUser, history])
-
-  useEffect(() => {
       if (process.env.REACT_APP_STAGE !== 'TEST') {
           return;
       }
@@ -36,7 +36,7 @@ const TestingLoginComponent: React.FC<Props> = ({ location, setCurrentUser, curr
     if (email && password) {
         login(email as string, password as string);
     }
-  }, [location, login])
+  }, [location])
 
   return (
     null
