@@ -36,7 +36,7 @@ const TestingLoginComponent: React.FC<Props> = ({ location, setCurrentUser, curr
     if (email && password) {
         login(email as string, password as string);
     }
-  }, [location])
+  }, [location, setCurrentUser])
 
   return (
     null
