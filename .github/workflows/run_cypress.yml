@@ -9,9 +9,8 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action
         with:
-          env: TEST_USER_EMAIL=test1@example.com, TEST_USER_PASSWORD=Passw0rd!
           record: true
           build: yarn build
           start: yarn serve -s build
@@ -19,3 +18,5 @@ jobs:
         env:
           CYPRESS_BASE_URL: 'http://localhost:5000/'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_DASHBOARD_KEY }}
+          CYPRESS_TEST_USER_EMAIL: 'test1@example.com'
+          CYPRESS_TEST_USER_PASSWORD: 'Passw0rd!'
