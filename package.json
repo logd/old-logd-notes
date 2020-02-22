@@ -20,6 +20,8 @@
     "atf": "atf -d 'src' -e 'ts' 'tsx'",
     "test": "react-scripts test --env=jsdom",
     "e2e:dev": "CYPRESS_BASE_URL=http://localhost:3000 cypress open",
+    "e2e:build": "CYPRESS_BASE_URL=http://localhost:5000 cypress open",
+    "serve": "serve -s build"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.0.0",
