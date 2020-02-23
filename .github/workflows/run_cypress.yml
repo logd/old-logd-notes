@@ -12,10 +12,9 @@ jobs:
         with:
           build: yarn build
           start: yarn serve
+          env: TEST_EMAIL=${{ secrets.TEST_EMAIL }}, TEST_PASSWORD=${{ secrets.TEST_PASSWORD }}
           wait-on: 'http://localhost:5000'
         env:
           CYPRESS_DASHBOARD_KEY: ${{ secrets.CYPRESS_DASHBOARD_KEY }}
           CYPRESS_BASE_URL: http://localhost:5000
-          CYPRESS_TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
-          CYPRESS_TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
           REACT_APP_STAGE: TEST
