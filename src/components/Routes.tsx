@@ -5,7 +5,6 @@ import { Login } from './Login';
 import { AnonRoute } from './AnonRoute';
 import { AuthRoute } from './AuthRoute';
 import { AppProps } from '../models';
-import { TestingLogin } from './TestingLogin';
 
 interface Props {
   appProps: AppProps
