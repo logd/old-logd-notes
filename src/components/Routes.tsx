@@ -14,7 +14,6 @@ interface Props {
 export const Routes: React.FC<Props> = ({appProps}) => {
   return (
     <Switch>
-      <AnonRoute path="/login-testing" exact component={TestingLogin} appProps={appProps} />
       <AuthRoute path="/" exact component={Home} appProps={appProps} />
       <AnonRoute path="/login" exact component={Login} appProps={appProps} />
     </Switch>
