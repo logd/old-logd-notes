@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "aws-amplify": "^2.2.1",
     "react": "^16.10.2",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.10.2",
@@ -12,7 +11,7 @@
     "react-scripts": "^3.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "build:dev": "REACT_APP_STAGE=DEV yarn build",
     "build:prod": "REACT_APP_STAGE=PROD yarn build",
