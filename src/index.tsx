@@ -1,9 +1,9 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 import registerServiceWorker from "./registerServiceWorker";
-import Home from './components/Home';
+import { Editor } from './components/Editor';
 
 ReactDOM.render(
-    <Home />,
+    <Editor />,
 document.getElementById("root") as HTMLElement);
 registerServiceWorker();

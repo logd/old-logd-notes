@@ -1,14 +1,21 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { BrowserRouter as Router } from 'react-router-dom';
-import { App } from "./App";
+import React from "react";
+import renderer from 'react-test-renderer';
+import { Editor } from "./Editor";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  ReactDOM.render(
-    <Router>
-    <App />
-  </Router>
-  , div);
-  ReactDOM.unmountComponentAtNode(div);
+jest.mock("./Editor", () => {
+  return {
+    Editor: () => {
+      return <></>;
+    },
+  };
+});
+
+it("renders correctly", () => {
+  const tree = renderer
+    .create(<div>
+      <Editor />
+      </div>
+      )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });
