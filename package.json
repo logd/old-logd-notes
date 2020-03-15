@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.10.2",
+    "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.16",
-    "react-dom": "^16.10.2",
+    "react-dom": "^16.13.0",
     "react-quill": "^1.3.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.3.0"
+    "react-scripts": "^3.4.0"
   },
   "scripts": {
     "atf": "atf -d 'src' -e 'ts' 'tsx'",
@@ -22,18 +22,18 @@
     "test": "react-scripts test --env=jsdom"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.0.0",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^8.0.3",
-    "@types/jest": "^24.9.0",
-    "@types/node": "^12.7.12",
+    "@testing-library/jest-dom": "^5.1.1",
+    "@testing-library/react": "^10.0.1",
+    "@testing-library/user-event": "^10.0.0",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.1",
     "@types/react": "^16.9.5",
     "@types/react-dom": "^16.0.7",
     "@types/react-router-dom": "^5.1.3",
     "auto-test-file": "^1.2.2",
     "cypress": "^4.1.0",
     "serve": "^11.3.0",
-    "ts-jest": "^24.3.0",
+    "ts-jest": "^25.2.1",
     "typescript": "^3.6.4"
   },
   "browserslist": {
