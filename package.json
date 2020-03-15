@@ -15,8 +15,10 @@
     "build": "react-scripts build",
     "build:dev": "REACT_APP_STAGE=DEV yarn build",
     "build:prod": "REACT_APP_STAGE=PROD yarn build",
+    "e2e:dev": "CYPRESS_baseUrl=http://localhost:3000/ cypress open",
     "eject": "react-scripts eject",
     "atf": "atf -d 'src' -e 'ts' 'tsx'",
+    "serve": "serve -s build",
     "test": "react-scripts test --env=jsdom",
     "test:e2e": "cypress open",
     "test:e2e:ci": "cypress run --record"
