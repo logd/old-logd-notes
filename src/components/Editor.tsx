@@ -6,5 +6,5 @@ import { usePersistedState } from '../hooks';
 export function Editor() {
   const {state, setState} = usePersistedState("LOGD_TEXT", "");
 
-  return (<ReactQuill value={state} onChange={setState} />);
+  return (<ReactQuill value={state} onChange={setState} placeholder={"Start typing to add notes.  All changes are stored locally only."} />);
 }
