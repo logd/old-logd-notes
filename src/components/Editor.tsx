@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactQuill from "@wyrdathru/react-quill";
 import "@wyrdathru/react-quill/dist/quill.snow.css";
 import { usePersistedState } from '../hooks';
