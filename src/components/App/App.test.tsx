@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from 'react-test-renderer';
-import { Editor } from "./Editor";
+import { App } from "./App";
 
-jest.mock("./Editor", () => {
+jest.mock("../Editor/Editor", () => {
   return {
     Editor: () => {
       return <></>;
@@ -12,10 +12,7 @@ jest.mock("./Editor", () => {
 
 it("renders correctly", () => {
   const tree = renderer
-    .create(<div>
-      <Editor />
-      </div>
-      )
+    .create(<App />)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
