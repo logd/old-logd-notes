@@ -1,14 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
-<div>
-  <div>
-    <div>
-      Logo
-    </div>
-    <div>
-      Login
-    </div>
-  </div>
-</div>
-`;
+exports[`renders correctly 1`] = `<div />`;
