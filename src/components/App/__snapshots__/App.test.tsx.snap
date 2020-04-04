@@ -1,3 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `<div />`;
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="sc-AxjAm eYjUwD"
+  >
+    <div
+      className="sc-AxiKw efHbud"
+    >
+      logd
+    </div>
+    <div
+      className="sc-AxirZ dudmGI"
+    >
+      Quick personal notes, saved locally only.
+    </div>
+  </div>
+</div>
+`;
