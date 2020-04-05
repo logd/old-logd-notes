@@ -25,9 +25,13 @@ const Main = styled.div`
 export const AppHeader = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
-  const { user, isAuthenticated, loginWithPopup, logout } = useContext(
-    AuthContext
-  );
+  const {
+    authLoading,
+    user,
+    isAuthenticated,
+    loginWithPopup,
+    logout,
+  } = useContext(AuthContext);
 
   const logoutWithRedirect = () =>
     logout({
@@ -39,7 +43,7 @@ export const AppHeader = () => {
       <Main>{isHome ? <>logd</> : <Link to="/">logd</Link>}</Main>
       <Smaller>Quick personal notes, saved locally only.</Smaller>
       <div>
-        {isAuthenticated ? (
+        {!authLoading && isAuthenticated ? (
           <div>
             user info: {user.name}{" "}
             <button onClick={() => logoutWithRedirect()}>Log out</button>
