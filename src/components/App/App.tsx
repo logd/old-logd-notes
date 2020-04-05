@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppHeader } from '../AppHeader/AppHeader';
 import { Editor } from '../Editor/Editor';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Privacy } from '../../routes';
 
 export const App = () => <div>
@@ -9,5 +9,8 @@ export const App = () => <div>
     <Switch>
       <Route path="/" exact component={Editor} />
       <Route path="/privacy" component={Privacy} />
+      <Route path="*" render={() => <Redirect to={{
+          pathname: "/"
+      }} />} />
     </Switch>
 </div>
