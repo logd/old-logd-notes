@@ -1,14 +1,10 @@
 import React from "react";
 import renderer from 'react-test-renderer';
-import { AppHeader } from "./AppHeader";
-import { MemoryRouter } from 'react-router';
+import { Privacy } from "../Privacy";
 
 it("renders correctly", () => {
   const tree = renderer
-    .create(<MemoryRouter>
-      <AppHeader />
-    </MemoryRouter>
-    )
+    .create(<Privacy />)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
