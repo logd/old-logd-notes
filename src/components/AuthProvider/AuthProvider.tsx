@@ -67,6 +67,7 @@ export const AuthProvider: React.FC<AuthProviderProps & Auth0ClientOptions> = ({
                     const user = await auth0FromHook.getUser();
                     setUser(user);
                   }
+                  setLoading(false);
                 
             } catch (error) {
                 console.error('initAuth0 error: ', error);
