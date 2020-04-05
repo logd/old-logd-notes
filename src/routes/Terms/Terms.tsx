@@ -1,3 +1,4 @@
 import React from 'react';
+import { Page } from '../../components';
 
-export const Terms = () => <div>Terms</div>
+export const Terms = () => <Page>Terms</Page>
