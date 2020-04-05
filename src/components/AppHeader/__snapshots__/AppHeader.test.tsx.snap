@@ -2,15 +2,15 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="sc-AxjAm eYjUwD"
+  className="sc-AxjAm dQiVsD"
 >
   <div
-    className="sc-AxiKw efHbud"
+    className="sc-AxiKw cjyCOd"
   >
     logd
   </div>
   <div
-    className="sc-AxirZ dudmGI"
+    className="sc-AxirZ gnYjwA"
   >
     Quick personal notes, saved locally only.
   </div>
