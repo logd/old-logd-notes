@@ -5,7 +5,7 @@ exports[`renders correctly 1`] = `
   className="sc-AxhUy dTcJfN"
 >
   <div
-    className="sc-AxjAm dQiVsD"
+    className="sc-AxjAm kFfAGk"
   >
     <div
       className="sc-AxiKw cjyCOd"
@@ -16,6 +16,13 @@ exports[`renders correctly 1`] = `
       className="sc-AxirZ gnYjwA"
     >
       Quick personal notes, saved locally only.
+    </div>
+    <div>
+      <button
+        onClick={[Function]}
+      >
+        Login
+      </button>
     </div>
   </div>
   <div
