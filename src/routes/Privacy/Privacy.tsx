@@ -1,6 +1,7 @@
 import React from 'react';
+import { Page } from '../../components';
 
-export const Privacy = () => <div>
+export const Privacy = () => <Page>
     <h1>Privacy Policy for Logd</h1>
 <p>At Logd, accessible from https://logd.co, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Logd and how we use it.</p>
 <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to <a href="mailto:privacy@anders.co">contact us</a>.</p>
@@ -59,4 +60,4 @@ export const Privacy = () => <div>
 <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
 
 <p>Logd does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
-</div>
+</Page>
