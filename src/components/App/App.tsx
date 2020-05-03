@@ -2,7 +2,7 @@ import React from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { Editor } from "../Editor/Editor";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { Privacy } from "../../routes";
+import { Privacy, Home, Login } from "../../routes";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -19,8 +19,10 @@ export const App = () => (
     <AppHeader />
     <Main>
       <Switch>
-        <Route path="/" exact component={Editor} />
+        <Route path="/" exact component={Home} />
+        <Route path="/login" exact component={Login} />
         <Route path="/privacy" exact component={Privacy} />
+        <Route path="/s/:space" component={Editor} />
         <Route
           path="*"
           render={() => (

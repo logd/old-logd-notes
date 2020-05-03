@@ -1,1 +1,3 @@
-export * from './Privacy/Privacy';
+export * from "./Home/Home";
+export * from "./Login/Login";
+export * from "./Privacy/Privacy";
