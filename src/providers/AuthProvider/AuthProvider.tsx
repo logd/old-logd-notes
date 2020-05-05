@@ -1,29 +1,40 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 
-export const AuthContext = createContext({
-  currentUser: null,
+interface AuthContext {
+  authLoading: boolean;
+  isAuthenticated: boolean;
+}
+
+export const AuthContext = createContext<AuthContext>({
+  authLoading: true,
+  isAuthenticated: false,
 });
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        const user = await Auth.currentUserInfo();
-        console.log("user: ", user);
-        if (user) {
-          setCurrentUser(user);
-        }
-      } catch (error) {}
-    };
-
-    getUser();
+    loadAuth();
   }, []);
+
+  async function loadAuth() {
+    try {
+      await Auth.currentSession();
+      setIsAuthenticated(true);
+    } catch (error) {
+      if (error !== "No current user") {
+        console.log("error: ", error);
+      }
+    } finally {
+      setAuthLoading(false);
+    }
+  }
   return (
     <AuthContext.Provider
       value={{
-        currentUser,
+        isAuthenticated,
+        authLoading,
       }}
     >
       {children}

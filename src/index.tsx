@@ -14,7 +14,6 @@ console.log(
 );
 Amplify.configure({
   Auth: {
-    mandatorySignIn: false,
     region: process.env.REACT_APP_AWS_REGION,
     userPoolId: amplifyConfig.cognito.USER_POOL_ID,
     identityPoolId: amplifyConfig.cognito.IDENTITY_POOL_ID,

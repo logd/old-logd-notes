@@ -14,26 +14,29 @@ const Wrapper = styled.div`
 const Main = styled.div`
   flex: 1;
 `;
-export const App = () => (
-  <Wrapper>
-    <AppHeader />
-    <Main>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/privacy" exact component={Privacy} />
-        <Route path="/s/:space" component={Editor} />
-        <Route
-          path="*"
-          render={() => (
-            <Redirect
-              to={{
-                pathname: "/",
-              }}
-            />
-          )}
-        />
-      </Switch>
-    </Main>
-  </Wrapper>
-);
+export const App = () => {
+  // const { authLoading } = useContext(AuthContext);
+  return (
+    <Wrapper>
+      <AppHeader />
+      <Main>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/privacy" exact component={Privacy} />
+          <Route path="/s/:space" component={Editor} />
+          <Route
+            path="*"
+            render={() => (
+              <Redirect
+                to={{
+                  pathname: "/",
+                }}
+              />
+            )}
+          />
+        </Switch>
+      </Main>
+    </Wrapper>
+  );
+};
