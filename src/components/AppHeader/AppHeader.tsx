@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
-import { AuthContext } from "../../providers";
 import { UserNav } from "../UserNav/UserNav";
 
 const theme = `
@@ -17,9 +16,9 @@ const Wrapper = styled.div`
   ${theme};
 `;
 
-const Smaller = styled.div`
-  font-size: smaller;
-`;
+// const Smaller = styled.div`
+//   font-size: smaller;
+// `;
 
 const Main = styled.div`
   flex: 1;

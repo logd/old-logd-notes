@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 // import styled from "styled-components";
 import { AuthContext } from "../../providers";
+import { useHistory } from "react-router-dom";
+import { Auth } from "aws-amplify";
 
 // const theme = `
 //     font-size: .9em;
@@ -16,7 +18,35 @@ import { AuthContext } from "../../providers";
 // `;
 
 export const UserNav = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const history = useHistory();
+  const {
+    authLoading,
+    isAuthenticated,
+    currentUser,
+    setIsAuthenticated,
+  } = useContext(AuthContext);
 
-  return <>{isAuthenticated ? <div>User Info</div> : <div>Login link</div>}</>;
+  async function handleLogout() {
+    try {
+      await Auth.signOut();
+      setIsAuthenticated(false);
+      history.push("/login");
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  }
+  return (
+    <>
+      {authLoading ? (
+        <div />
+      ) : isAuthenticated ? (
+        <div>
+          {currentUser && currentUser.email} |{" "}
+          <button onClick={handleLogout}>Sign Out</button>
+        </div>
+      ) : (
+        <div>Login link</div>
+      )}
+    </>
+  );
 };

@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
+// import { useHistory } from "react-router-dom";
 
 interface User {
   email: string;
@@ -18,6 +19,7 @@ export const AuthContext = createContext<AuthContext>({
 });
 
 export const AuthProvider: React.FC = ({ children }) => {
+  // const history = useHistory();
   const [authLoading, setAuthLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | undefined>();
@@ -29,6 +31,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (isAuthenticated) {
       setUser();
+    } else {
+      setCurrentUser(undefined);
     }
   }, [isAuthenticated]);
 
@@ -48,7 +52,6 @@ export const AuthProvider: React.FC = ({ children }) => {
   async function setUser() {
     try {
       const result: any = await Auth.currentAuthenticatedUser();
-      console.log("CognitoUser: ", result);
       if (!result) {
         throw new Error("Could not set current user");
       }
@@ -65,6 +68,14 @@ export const AuthProvider: React.FC = ({ children }) => {
       console.log("error: ", error);
     }
   }
+
+  // async function handleLogout() {
+  //   await Auth.signOut();
+
+  //   setIsAuthenticated(false);
+
+  //   history.push("/login");
+  // }
   return (
     <AuthContext.Provider
       value={{
