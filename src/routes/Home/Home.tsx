@@ -1,19 +1,6 @@
-import React, { useContext } from "react";
-import { Page, Centered, Spinner } from "../../components";
-import { AuthContext } from "../../providers";
+import React from "react";
+import { Page } from "../../components";
 
 export const Home = () => {
-  const { authLoading } = useContext(AuthContext);
-
-  return (
-    <Page>
-      {authLoading ? (
-        <Centered>
-          <Spinner />
-        </Centered>
-      ) : (
-        <>HomePage</>
-      )}
-    </Page>
-  );
+  return <Page>HomePage</Page>;
 };

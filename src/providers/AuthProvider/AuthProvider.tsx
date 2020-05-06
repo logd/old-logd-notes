@@ -4,11 +4,13 @@ import { Auth } from "aws-amplify";
 interface AuthContext {
   authLoading: boolean;
   isAuthenticated: boolean;
+  setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
 
 export const AuthContext = createContext<AuthContext>({
   authLoading: true,
   isAuthenticated: false,
+  setIsAuthenticated: () => null,
 });
 
 export const AuthProvider: React.FC = ({ children }) => {
@@ -23,7 +25,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       await Auth.currentSession();
       setIsAuthenticated(true);
     } catch (error) {
-      if (error !== "No current user") {
+      if (error && error !== "No current user") {
         console.log("error: ", error);
       }
     } finally {
@@ -34,6 +36,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     <AuthContext.Provider
       value={{
         isAuthenticated,
+        setIsAuthenticated,
         authLoading,
       }}
     >
