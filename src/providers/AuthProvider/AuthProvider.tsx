@@ -69,13 +69,6 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
   }
 
-  // async function handleLogout() {
-  //   await Auth.signOut();
-
-  //   setIsAuthenticated(false);
-
-  //   history.push("/login");
-  // }
   return (
     <AuthContext.Provider
       value={{

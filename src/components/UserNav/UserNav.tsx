@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 // import styled from "styled-components";
 import { AuthContext } from "../../providers";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation, Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import { ROUTES } from "../../routes";
 
 // const theme = `
 //     font-size: .9em;
@@ -17,7 +18,13 @@ import { Auth } from "aws-amplify";
 //   ${theme};
 // `;
 
-export const UserNav = () => {
+interface Props {
+  // isHome?: boolean;
+}
+
+export const UserNav: React.FC<Props> = () => {
+  const location = useLocation();
+  const isLogin = location.pathname === `/${ROUTES.LOGIN}`; // TODO: define routes as consts, turn this into a util
   const history = useHistory();
   const {
     authLoading,
@@ -30,7 +37,7 @@ export const UserNav = () => {
     try {
       await Auth.signOut();
       setIsAuthenticated(false);
-      history.push("/login");
+      history.push(`/${ROUTES.LOGIN}`);
     } catch (error) {
       console.log("error: ", error);
     }
@@ -44,8 +51,8 @@ export const UserNav = () => {
           {currentUser && currentUser.email} |{" "}
           <button onClick={handleLogout}>Sign Out</button>
         </div>
-      ) : (
-        <div>Login link</div>
+      ) : isLogin ? null : (
+        <Link to={`/${ROUTES.LOGIN}`}>Login</Link>
       )}
     </>
   );
