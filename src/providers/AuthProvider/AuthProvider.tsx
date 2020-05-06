@@ -1,8 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 
+interface User {
+  email: string;
+}
 interface AuthContext {
   authLoading: boolean;
+  currentUser?: User;
   isAuthenticated: boolean;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
 }
@@ -16,9 +20,17 @@ export const AuthContext = createContext<AuthContext>({
 export const AuthProvider: React.FC = ({ children }) => {
   const [authLoading, setAuthLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | undefined>();
+
   useEffect(() => {
     loadAuth();
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setUser();
+    }
+  }, [isAuthenticated]);
 
   async function loadAuth() {
     try {
@@ -32,12 +44,34 @@ export const AuthProvider: React.FC = ({ children }) => {
       setAuthLoading(false);
     }
   }
+
+  async function setUser() {
+    try {
+      const result: any = await Auth.currentAuthenticatedUser();
+      console.log("CognitoUser: ", result);
+      if (!result) {
+        throw new Error("Could not set current user");
+      }
+
+      const email = result.attributes.email;
+      if (!email) {
+        throw new Error("No user email found");
+      }
+
+      setCurrentUser({
+        email,
+      });
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  }
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
         setIsAuthenticated,
         authLoading,
+        currentUser,
       }}
     >
       {children}

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
+import { AuthContext } from "../../providers";
+import { UserNav } from "../UserNav/UserNav";
 
 const theme = `
     font-size: .9em;
@@ -23,13 +25,15 @@ const Main = styled.div`
   flex: 1;
 `;
 export const AppHeader = () => {
+  // const { isAuthenticated } = useContext(AuthContext);
+
   const location = useLocation();
   const isHome = location.pathname === "/";
 
   return (
     <Wrapper>
       <Main>{isHome ? <>logd</> : <Link to="/">logd</Link>}</Main>
-      <Smaller>Quick personal notes, saved locally only.</Smaller>
+      <UserNav />
     </Wrapper>
   );
 };
