@@ -5,13 +5,16 @@
   "dependencies": {
     "@wyrdathru/react-quill": "^1.3.3",
     "aws-amplify": "^3.0.10",
+    "lodash": "^4.17.15",
     "quill": "^1.3.7",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-markdown": "^4.3.1",
     "react-quilljs": "^1.2.6",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "use-constant": "^1.0.0"
   },
   "scripts": {
     "atf": "atf -d 'src' -e 'ts' 'tsx'",
@@ -29,6 +32,7 @@
     "@testing-library/react": "^10.0.1",
     "@testing-library/user-event": "^10.0.0",
     "@types/jest": "^25.1.4",
+    "@types/lodash": "^4.14.150",
     "@types/node": "^13.9.1",
     "@types/quill": "^2.0.3",
     "@types/react": "^16.9.5",

@@ -1,26 +1,10 @@
 import React, { useContext } from "react";
-// import styled from "styled-components";
 import { AuthContext } from "../../providers";
 import { useHistory, useLocation, Link } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import { ROUTES } from "../../routes";
 
-// const theme = `
-//     font-size: .9em;
-//     font-weight: 100;
-//     color: #c9d6df;
-//     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-// `;
-
-// const Wrapper = styled.div`
-//   display: flex;
-//   padding: 1em;
-//   ${theme};
-// `;
-
-interface Props {
-  // isHome?: boolean;
-}
+interface Props {}
 
 export const UserNav: React.FC<Props> = () => {
   const location = useLocation();

@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
-// import { useHistory } from "react-router-dom";
 
 interface User {
+  id: string;
   email: string;
 }
 interface AuthContext {
@@ -19,7 +19,6 @@ export const AuthContext = createContext<AuthContext>({
 });
 
 export const AuthProvider: React.FC = ({ children }) => {
-  // const history = useHistory();
   const [authLoading, setAuthLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | undefined>();
@@ -61,8 +60,14 @@ export const AuthProvider: React.FC = ({ children }) => {
         throw new Error("No user email found");
       }
 
+      const id = result.attributes.sub;
+      if (!id) {
+        throw new Error("No user id found");
+      }
+
       setCurrentUser({
         email,
+        id,
       });
     } catch (error) {
       console.log("error: ", error);

@@ -1,16 +1,14 @@
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import React, { useContext } from "react";
+import { Redirect, Route, RouteProps } from "react-router-dom";
+import { AuthContext } from "../../providers";
 
-interface Props {
-  isAuthenticated?: boolean;
+interface Props extends RouteProps {
+  children?: any;
 }
 
-export const PrivateRoute: React.FC<Props> = ({
-  isAuthenticated,
-  children,
-  ...rest
-}) => {
+export const PrivateRoute: React.FC<Props> = ({ children, ...rest }) => {
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <Route
       {...rest}

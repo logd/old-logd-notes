@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
-import { Editor } from "../Editor/Editor";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { Privacy, Home, Login } from "../../routes";
 import styled from "styled-components";
@@ -34,9 +33,7 @@ export const App = () => {
             <AnonOnlyRoute exact path="/login">
               <Login />
             </AnonOnlyRoute>
-            {/* <Route path="/login" exact component={Login} /> */}
             <Route path="/privacy" exact component={Privacy} />
-            <Route path="/s/:space" component={Editor} />
             <Route
               path="*"
               render={() => (

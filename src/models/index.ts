@@ -1,1 +1,1 @@
-export * from './AppProps';
+export * from "./Note";
