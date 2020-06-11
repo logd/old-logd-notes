@@ -67,6 +67,20 @@ export const Auth0Provider = ({
     setIsAuthenticated(true);
     setUser(u);
   };
+
+  const handleLogout = async () => {
+    setLoading(true);
+    try {
+      await auth0Client.logout({
+        returnTo: window.location.origin,
+      });
+      setUser(undefined);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+    setLoading(false);
+  };
+
   return (
     <Auth0Context.Provider
       value={{
@@ -80,7 +94,7 @@ export const Auth0Provider = ({
         loginWithRedirect: (...p) => auth0Client.loginWithRedirect(...p),
         getTokenSilently: (...p) => auth0Client.getTokenSilently(...p),
         getTokenWithPopup: (...p) => auth0Client.getTokenWithPopup(...p),
-        logout: (...p) => auth0Client.logout(...p),
+        logout: handleLogout,
       }}
     >
       {children}
