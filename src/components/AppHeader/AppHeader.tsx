@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
+import { UserNav } from "../UserNav/UserNav";
 
 const theme = `
     font-size: .9em;
     font-weight: 100;
-    color: #c9d6df;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 `;
 
@@ -15,12 +15,13 @@ const Wrapper = styled.div`
   ${theme};
 `;
 
-const Smaller = styled.div`
-  font-size: smaller;
-`;
+// const Smaller = styled.div`
+//   font-size: smaller;
+// `;
 
 const Main = styled.div`
   flex: 1;
+  color: #c9d6df;
 `;
 export const AppHeader = () => {
   const location = useLocation();
@@ -29,7 +30,8 @@ export const AppHeader = () => {
   return (
     <Wrapper>
       <Main>{isHome ? <>logd</> : <Link to="/">logd</Link>}</Main>
-      <Smaller>Quick personal notes, saved locally only.</Smaller>
+      {/* <Smaller>Quick personal notes, saved locally only.</Smaller> */}
+      <UserNav />
     </Wrapper>
   );
 };
