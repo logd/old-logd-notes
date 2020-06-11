@@ -4,6 +4,7 @@ import { Editor } from "../Editor/Editor";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { Privacy } from "../../routes";
 import styled from "styled-components";
+import { PrivateRoute } from "../PrivateRoute/PrivateRoute";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -19,7 +20,7 @@ export const App = () => (
     <AppHeader />
     <Main>
       <Switch>
-        <Route path="/" exact component={Editor} />
+        <PrivateRoute path="/" component={Editor} />
         <Route path="/privacy" exact component={Privacy} />
         <Route
           path="*"
