@@ -50,7 +50,7 @@ export const Auth0Provider = ({
     try {
       await auth0Client.loginWithPopup(params);
     } catch (error) {
-      console.error(error);
+      console.error("loginWithPopup -> error", error);
     } finally {
       setPopupOpen(false);
     }
@@ -76,7 +76,7 @@ export const Auth0Provider = ({
       });
       setUser(undefined);
     } catch (error) {
-      console.log("error: ", error);
+      console.error("handleLogout -> error", error);
     }
     setLoading(false);
   };

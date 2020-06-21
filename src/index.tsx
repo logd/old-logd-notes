@@ -3,8 +3,7 @@ import ReactDOM from "react-dom";
 import registerServiceWorker from "./registerServiceWorker";
 import { App } from "./components/App/App";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Auth0Provider } from "./providers/";
-import auth0config from "./config/auth0.json";
+import { AuthorizedApolloProvider, Auth0Provider } from "./providers/";
 import history from "./utils/history";
 
 const onRedirectCallback = (appState: any) => {
@@ -18,13 +17,15 @@ const onRedirectCallback = (appState: any) => {
 ReactDOM.render(
   <Router>
     <Auth0Provider
-      domain={auth0config.domain}
-      client_id={auth0config.clientId}
-      audience={auth0config.audience}
+      domain={process.env.REACT_APP_AUTH0_DOMAIN}
+      client_id={process.env.REACT_APP_AUTH0_CLIENT_ID}
+      audience={process.env.REACT_APP_AUTH0_AUDIENCE}
       redirect_uri={window.location.origin}
       onRedirectCallback={onRedirectCallback}
     >
-      <App />
+      <AuthorizedApolloProvider>
+        <App />
+      </AuthorizedApolloProvider>
     </Auth0Provider>
   </Router>,
   document.getElementById("root") as HTMLElement
