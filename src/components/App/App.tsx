@@ -15,24 +15,27 @@ const Wrapper = styled.div`
 const Main = styled.div`
   flex: 1;
 `;
-export const App = () => (
-  <Wrapper>
-    <AppHeader />
-    <Main>
-      <Switch>
-        <PrivateRoute path="/" component={Editor} />
-        <Route path="/privacy" exact component={Privacy} />
-        <Route
-          path="*"
-          render={() => (
-            <Redirect
-              to={{
-                pathname: "/",
-              }}
-            />
-          )}
-        />
-      </Switch>
-    </Main>
-  </Wrapper>
-);
+
+export const App = () => {
+  return (
+    <Wrapper>
+      <AppHeader />
+      <Main>
+        <Switch>
+          <PrivateRoute path="/" component={Editor} />
+          <Route path="/privacy" exact component={Privacy} />
+          <Route
+            path="*"
+            render={() => (
+              <Redirect
+                to={{
+                  pathname: "/",
+                }}
+              />
+            )}
+          />
+        </Switch>
+      </Main>
+    </Wrapper>
+  );
+};
